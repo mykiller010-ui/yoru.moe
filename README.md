@@ -1,13 +1,28 @@
 # yoru.moe
-My personal website: https://yoru.moe  
-Hosted on GitHub Pages using a custom domain.
 
-### Dependencies
-* [FontAwesome](https://github.com/FortAwesome/Font-Awesome) (v4.7.0)
-* [Bootstrap](https://github.com/twbs/bootstrap) (v3.3.6)
-* [jQuery](https://github.com/jquery/jquery) (v2.2.3)
-* [Tilt.js](https://github.com/gijsroge/tilt.js) (v1.2.1)
-* [Vegas](https://github.com/jaysalvat/vegas) (v2.2.1)
+My personal landing page - links, lo-fi, and a little bit of night.
+Live at <https://yoru.moe>
 
-### Why is it forked?
-Uh. I lost it :^)
+## Stack
+
+- [Vite](https://vitejs.dev) + TypeScript, vanilla DOM
+- Self-hosted fonts: [Shippori Mincho B1](https://fonts.google.com/specimen/Shippori+Mincho+B1)
+  subset to the 夜 glyph, [Zen Kaku Gothic New](https://fonts.google.com/specimen/Zen+Kaku+Gothic+New)
+- Brand icons inlined from [simple-icons](https://simpleicons.org)
+- GitHub Actions builds and deploys `dist/` to Pages on every push
+
+## Local development
+
+```sh
+npm install
+npm run dev
+npm run build
+npm run preview
+```
+
+## Credits
+- Icon paths from simple-icons (CC0). 
+- Fonts under the SIL Open Font License.
+
+## Licence
+- MIT.

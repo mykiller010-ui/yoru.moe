@@ -1,0 +1,519 @@
+:root {
+  --ink: #090b14;
+  --night: #11152a;
+  --moon: #eef0f6;
+  --mist: rgba(238, 240, 246, 0.62);
+  --faint: rgba(238, 240, 246, 0.38);
+  --lantern: #ffb45e;
+  --dusk: #e88aa8;
+  --glass: rgba(13, 17, 34, 0.44);
+  --glass-edge: rgba(238, 240, 246, 0.14);
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  color-scheme: dark;
+}
+
+@font-face {
+  font-family: "Yoru Kanji";
+  src: url("/fonts/yoru-kanji.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ink) radial-gradient(120% 90% at 50% 20%, #141a36 0%, var(--ink) 70%);
+  color: var(--moon);
+  font-family: "Zen Kaku Gothic New", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--lantern) 35%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--lantern);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  opacity: 0;
+  transition: opacity 1.6s ease;
+  --fade: 1800ms;
+  --kb: 11000ms;
+}
+
+.bg.ready {
+  opacity: 1;
+}
+
+.bg-scrim {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(72% 58% at 50% 44%,
+      rgba(7, 9, 16, 0.62) 0%,
+      rgba(7, 9, 16, 0.32) 45%,
+      transparent 72%);
+  opacity: var(--scrim, 0);
+  transition: opacity var(--fade) ease;
+}
+
+.bg-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity var(--fade) ease;
+  will-change: opacity, transform;
+}
+
+.bg-layer.active {
+  opacity: 1;
+}
+
+.bg-layer.kb {
+  animation: kenburns var(--kb) linear forwards;
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1.05);
+  }
+
+  to {
+    transform: scale(1.13);
+  }
+}
+
+.bg-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(5, 6, 12, 0.72) 0%, rgba(5, 6, 12, 0.12) 28%, transparent 45%),
+    radial-gradient(130% 95% at 50% 28%, transparent 42%, rgba(5, 6, 12, 0.62) 100%);
+}
+
+.snow {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+.scene {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 2.5rem 1.25rem calc(3rem + 104px);
+  perspective: 950px;
+}
+
+.identity {
+  text-align: center;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.identity>* {
+  opacity: 0;
+  translate: 0 16px;
+  animation: rise 0.9s var(--ease) forwards;
+}
+
+.kanji {
+  animation-delay: 0.1s;
+}
+
+.name {
+  animation-delay: 0.28s;
+}
+
+.rule {
+  animation-delay: 0.42s;
+}
+
+.tagline {
+  animation-delay: 0.42s;
+}
+
+.links {
+  animation-delay: 0.56s;
+}
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.kanji {
+  margin: 0;
+  font-family: "Yoru Kanji", "Shippori Mincho B1", "Hiragino Mincho ProN", serif;
+  font-weight: 700;
+  font-size: clamp(7rem, 24vw, 12.5rem);
+  line-height: 0.95;
+  color: var(--moon);
+  text-shadow:
+    0 2px 6px rgba(5, 6, 12, 0.55),
+    0 6px 34px rgba(5, 6, 12, 0.6),
+    0 0 16px rgba(238, 240, 246, 0.22),
+    0 0 64px rgba(101, 130, 222, 0.32),
+    0 14px 56px rgba(255, 180, 94, 0.26);
+}
+
+.name {
+  margin: 0.9rem 0 0;
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
+  font-weight: 700;
+  letter-spacing: 0.58em;
+  margin-left: 0.58em;
+  text-transform: uppercase;
+}
+
+.name,
+.tagline {
+  text-shadow:
+    0 1px 3px rgba(5, 6, 12, 0.6),
+    0 4px 18px rgba(5, 6, 12, 0.5);
+}
+
+.rule {
+  width: 58px;
+  height: 1px;
+  margin: 1.15rem auto 0;
+  background: linear-gradient(90deg, transparent, var(--lantern), transparent);
+}
+
+.tagline {
+  margin: 0.85rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--mist);
+}
+
+.tagline[hidden] {
+  display: none;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-top: 1.9rem;
+  padding: 0;
+}
+
+.chip {
+  --c: var(--moon);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.64rem 1.1rem;
+  border-radius: 999px;
+  background: var(--glass);
+  border: 1px solid var(--glass-edge);
+  backdrop-filter: blur(12px) saturate(1.25);
+  -webkit-backdrop-filter: blur(12px) saturate(1.25);
+  color: var(--moon);
+  font: 500 0.78rem / 1 "Zen Kaku Gothic New", system-ui, sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.25s var(--ease),
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.chip svg {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+  opacity: 0.92;
+  transition: fill 0.25s ease;
+  flex: none;
+}
+
+.chip:hover,
+.chip:focus-visible {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--c) 60%, transparent);
+  box-shadow:
+    0 12px 32px -10px color-mix(in srgb, var(--c) 55%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--c) 22%, transparent);
+}
+
+.chip:hover svg,
+.chip:focus-visible svg {
+  fill: var(--c);
+  opacity: 1;
+}
+
+.chip:active {
+  transform: translateY(-1px);
+}
+
+.player {
+  position: fixed;
+  left: 50%;
+  bottom: max(1.1rem, env(safe-area-inset-bottom, 0px) + 0.6rem);
+  transform: translateX(-50%);
+  width: min(660px, calc(100vw - 2rem));
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.6rem 1rem 0.6rem 0.6rem;
+  border-radius: 18px;
+  background: var(--glass);
+  border: 1px solid var(--glass-edge);
+  backdrop-filter: blur(16px) saturate(1.3);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  box-shadow: 0 20px 50px -22px rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  translate: 0 16px;
+  animation: rise 0.9s var(--ease) 0.75s forwards;
+  z-index: 20;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.pbtn {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--moon);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.pbtn svg {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+}
+
+.pbtn:hover {
+  background: rgba(238, 240, 246, 0.08);
+  color: var(--lantern);
+}
+
+.pbtn--play {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--glass-edge);
+}
+
+.pbtn--play svg {
+  width: 19px;
+  height: 19px;
+}
+
+.player-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.42rem;
+}
+
+.player-title {
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--moon);
+}
+
+.player-title.idle {
+  color: var(--faint);
+}
+
+.player-side {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.time {
+  font-family: ui-monospace, "SF Mono", "Cascadia Mono", monospace;
+  font-size: 0.66rem;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.vol-ic {
+  width: 15px;
+  height: 15px;
+  fill: var(--faint);
+  flex: none;
+}
+
+.seek,
+.vol {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  border-radius: 99px;
+  background: linear-gradient(to right,
+      var(--lantern) var(--p, 0%),
+      rgba(238, 240, 246, 0.16) var(--p, 0%));
+  cursor: pointer;
+  margin: 0;
+}
+
+.seek {
+  width: 100%;
+}
+
+.vol {
+  width: 72px;
+}
+
+.seek::-webkit-slider-thumb,
+.vol::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--moon);
+  border: 0;
+  transition: transform 0.15s ease;
+}
+
+.seek::-moz-range-thumb,
+.vol::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--moon);
+  border: 0;
+}
+
+.seek:hover::-webkit-slider-thumb,
+.vol:hover::-webkit-slider-thumb {
+  transform: scale(1.25);
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 96px);
+  transform: translate(-50%, 10px);
+  padding: 0.55rem 1.05rem;
+  border-radius: 999px;
+  background: var(--glass);
+  border: 1px solid var(--glass-edge);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--moon);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s var(--ease);
+  z-index: 40;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.toast b {
+  color: var(--lantern);
+  font-weight: 700;
+}
+
+.noscript {
+  position: fixed;
+  inset: auto 0 0;
+  margin: 0;
+  padding: 0.8rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--mist);
+  background: var(--ink);
+}
+
+@media (max-width: 560px) {
+  .player {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.7rem;
+  }
+
+  .player-side {
+    display: none;
+  }
+
+  .scene {
+    padding-bottom: calc(2.5rem + 92px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .identity>*,
+  .player {
+    animation: none;
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  .bg-layer {
+    transition-duration: 0.6s;
+  }
+
+  .bg-layer.kb {
+    animation: none;
+  }
+
+  .chip,
+  .chip:hover,
+  .chip:focus-visible {
+    transform: none;
+  }
+}

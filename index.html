@@ -1,140 +1,58 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<title>夜 - Official Website</title>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-		<meta name="description" content="">
-		<meta name="keywords" content="">
-		<meta name="team" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/vegas.min.css">
-		<script src="https://kit.fontawesome.com/3085d2b7d6.js" crossorigin="anonymous"></script>
-		<!-- MAIN CSS -->
-		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="css/snow.css">
-	</head>
-	<body>
-		<!-- MUSIC -->
-		<audio id="music">
-			<source type="audio/mpeg">
-		</audio>
-		<!-- SNOW CONTAINER -->
-		<div id="snow-container">
-			<div class="snow large"></div>
-			<div class="snow large delayed"></div>
-			<div class="snow medium"></div>
-			<div class="snow medium delayed"></div>
-			<div class="snow small"></div>
-			<div class="snow small delayed"></div>
-		</div>
-		<!-- PRE LOADER -->
-		<section class="preloader">
-			<div class="spinner">
-				<span class="spinner-rotate"></span>  
-			</div>
-		</section>
-		<!-- HOME -->
-		<section id="home">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 col-sm-12">
-						<!-- NOW PLAYING -->
-						<div class="home-info">
-							<h1 style="margin-bottom: 0;">
-								<b>夜</b>
-							</h1>
-							<h5 style="margin-top: 0; color: #fff;">
-								Yoru
-							</h5>
-							<ul class="social">
-								<li class="twitch">
-									<a target="_blank" href="https://twitch.tv/yoru_osu">
-										<span>
-											<i class="fa fa-twitch"></i>
-										</span>
-										<h3>Twitch</h3>
-									</a>
-								</li>
-								<!-- <li class="instagram">
-									<a target="_blank" href="https://instagram.com/yoruvr">
-										<span>
-											<i class="fa-brands fa-instagram"></i>
-										</span>
-										<h3>Instagram</h3>
-									</a>
-								</li> -->
-								<li class="discord">
-									<a class="popup" onclick="copyDiscord()">
-										<span>
-											<i class="fa-brands fa-discord"></i>
-										</span>
-										<h3>Discord</h3>
-									</a>
-								</li>
-								<li class="vrchat">
-									<a target="_blank" href="https://vrchat.com/home/user/usr_a9f7f9ef-3491-465d-93df-e0c4ad97babf">
-										<span>
-											<i class="fa-solid fa-vr-cardboard"></i>
-										</span>
-										<h3>VRChat</h3>
-									</a>
-								</li>
-								<li class="osu">
-									<a target="_blank" href="https://osu.ppy.sh/users/11292480">
-										<span>
-											<i class="fa-solid fa-circle"></i>
-										</span>
-										<h3>osu!</h3>
-									</a>
-								</li>
-								<li class="github">
-									<a target="_blank" href="https://github.com/yo-ru">
-										<span>
-											<i class="fa fa-github"></i>
-										</span>
-										<h3>GitHub</h3>
-									</a>
-								</li>
-							</ul>
-						</div>
-						<div id="track-selector" class="text-focus-in" style="display: none;">
-							<ul class="social">
-								<li>
-									<a onclick="playPrevSong()">
-										<span>
-											<i class="fa-solid fa-backward"></i>
-										</span>
-									</a>
-								</li>
-								<li>
-									<a onclick="playPauseSong()">
-										<span>
-											<i class="fa-solid fa-pause"></i>
-										</span>
-									</a>
-								</li>
-								<li>
-									<a onclick="playNextSong()">
-										<span>
-											<i class="fa-solid fa-forward"></i>
-										</span>
-									</a>
-								</li>
-							</ul>
-							<div id="now-playing" class="text-focus-in"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- SCRIPTS -->
-		<script src="js/jquery.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/vegas.min.js"></script>
-		<script src="js/tilt.jquery.min.js"></script>
-		<script src="js/custom.js"></script>
-	</body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>夜 - yoru</title>
+  <meta name="description" content="Yoru — links, lo-fi, and a little bit of night." />
+  <meta name="theme-color" content="#090b14" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href="https://yoru.moe/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="yoru.moe" />
+  <meta property="og:url" content="https://yoru.moe/" />
+  <meta property="og:title" content="夜 - yoru" />
+  <meta property="og:description" content="Links, lo-fi, and a little bit of night." />
+  <meta property="og:image" content="https://yoru.moe/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <script type="module" src="/src/main.ts"></script>
+</head>
+
+<body>
+  <div class="bg" id="bg" aria-hidden="true">
+    <div class="bg-layer"></div>
+    <div class="bg-layer"></div>
+    <div class="bg-scrim"></div>
+    <div class="bg-veil"></div>
+  </div>
+
+  <canvas class="snow" id="snow" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="scene">
+    <div class="identity" id="tilt">
+      <p class="kanji" id="kanji" lang="ja" data-depth="3">夜</p>
+      <h1 class="name" id="name" data-depth="2">yoru</h1>
+      <div class="rule" data-depth="1.5" aria-hidden="true"></div>
+      <p class="tagline" id="tagline" data-depth="1.5" hidden></p>
+      <nav class="links" id="links" data-depth="1" aria-label="Social links"></nav>
+    </div>
+  </main>
+
+  <footer class="player" id="player" aria-label="Music player"></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <noscript>
+    <p class="noscript">
+      The site relies heavily on JavaScript, so it won't work properly without it. Please enable JavaScript and reload
+      the page.
+    </p>
+  </noscript>
+</body>
+
 </html>
