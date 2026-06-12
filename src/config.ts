@@ -88,7 +88,7 @@ export const tracks: Track[] = [
 ];
 
 export const slides: string[] = Array.from(
-  { length: 10 },
+  { length: 7 },
   (_, i) => `/slides/${String(i + 1).padStart(2, "0")}.webp`,
 );
 
