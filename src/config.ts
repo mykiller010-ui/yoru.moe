@@ -26,7 +26,7 @@ export const links: SocialLink[] = [
     icon: "discord",
     color: "#5865f2",
     copy: "7a7a",
-    toast: "Copied — <b>yo.ru</b>",
+    toast: "Copied — <b>7a7a</b>",
   },
   {
     label: "GitHub",
