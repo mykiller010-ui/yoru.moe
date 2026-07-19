@@ -16,7 +16,7 @@ export interface Track {
 
 export const profile = {
   kanji: "夜",
-  name: "yoru",
+  name: "yon",
   tagline: "hobbyist developer, music enjoyer, and rhythm gamer",
 };
 
@@ -25,7 +25,7 @@ export const links: SocialLink[] = [
     label: "Discord",
     icon: "discord",
     color: "#5865f2",
-    copy: "yo.ru",
+    copy: "7a7a",
     toast: "Copied — <b>yo.ru</b>",
   },
   {
